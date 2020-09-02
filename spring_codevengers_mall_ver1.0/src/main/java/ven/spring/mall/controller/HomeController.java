@@ -1,4 +1,4 @@
-package ven.spring.mall;
+package ven.spring.mall.controller;
 
 import java.text.DateFormat;
 import java.util.Date;

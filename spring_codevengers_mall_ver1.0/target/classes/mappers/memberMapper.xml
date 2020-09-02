@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ven.codevengers.mappers.memberMapper">
+
+<!-- 회원가입 -->
+<insert id="signup">
+insert into member
+	(mem_num,mem_id,mem_passwd,mem_name,mem_birth,mem_tel1,mem_tel2,mem_tel3,mem_zipcode,
+		mem_address1,mem_address2,mem_gender,mem_email,mem_email_ck,mem_grade,mem_point,mem_receive_email,
+		mem_receive_sms,mem_register_datetime,mem_adminmemo,mem_group,mem_manager)";
+	values(mem_num_SEQ.nextval,#{mem_id},#{mem_passwd},#{mem_name},#{mem_birth},#{mem_tel1},#{mem_tel2},#{mem_tel3},#{mem_zipcode},#{mem_address1},#{mem_address2},#{mem_gender},#{mem_email},#{mem_email_ck},#{mem_grade},#{mem_point},#{mem_receive_email},#{mem_receive_sms},sysdate,#{mem_adminmemo},#{mem_group},#{mem_manager})
+</insert>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>
