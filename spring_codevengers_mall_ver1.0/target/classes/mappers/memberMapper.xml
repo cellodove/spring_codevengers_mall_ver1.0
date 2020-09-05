@@ -5,11 +5,19 @@
 <!-- 회원가입 -->
 <insert id="signup">
 insert into member
-	(mem_num,mem_id,mem_passwd,mem_name,mem_birth,mem_tel1,mem_tel2,mem_tel3,mem_zipcode,
-		mem_address1,mem_address2,mem_gender,mem_email,mem_email_ck,mem_grade,mem_point,mem_receive_email,
-		mem_receive_sms,mem_register_datetime,mem_adminmemo,mem_group,mem_manager)";
-	values(mem_num_SEQ.nextval,#{mem_id},#{mem_passwd},#{mem_name},#{mem_birth},#{mem_tel1},#{mem_tel2},#{mem_tel3},#{mem_zipcode},#{mem_address1},#{mem_address2},#{mem_gender},#{mem_email},#{mem_email_ck},#{mem_grade},#{mem_point},#{mem_receive_email},#{mem_receive_sms},sysdate,#{mem_adminmemo},#{mem_group},#{mem_manager})
+	(mem_num,mem_id,mem_passwd,mem_name,mem_birth,mem_tel1,mem_tel2,mem_tel3,mem_zipcode,mem_address1,mem_address2,mem_gender,mem_email,mem_email_ck,mem_grade,mem_point,mem_receive_email,mem_receive_sms,mem_register_datetime)
+	values(mem_num_SEQ.nextval,#{mem_id},#{mem_passwd},#{mem_name},#{mem_birth},#{mem_tel1},#{mem_tel2},#{mem_tel3},#{mem_zipcode},#{mem_address1},#{mem_address2},#{mem_gender},#{mem_email},'NO','bronze',0,#{mem_receive_email},#{mem_receive_sms},sysdate)
 </insert>
+
+
+<!-- 로그인 -->
+<select id="login" resultType="ven.spring.mall.model.MemberVO">
+select
+	mem_id, mem_passwd, mem_name, mem_manager
+from
+	member
+where mem_id = #{mem_id} 
+</select>
 
 
 

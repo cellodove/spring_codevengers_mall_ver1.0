@@ -51,4 +51,14 @@
     <servlet-name>MemberController</servlet-name>
     <url-pattern>/MemberController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdminController</display-name>
+    <servlet-name>AdminController</servlet-name>
+    <servlet-class>ven.spring.mall.controller.AdminController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminController</servlet-name>
+    <url-pattern>/AdminController</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ven.codevengers.mappers.adminMapper">
+
+
+
+<!-- 카테고리 호출 -->
+<select id="category"  resultType="ven.spring.mall.model.CategoryVO">
+ select
+  	level, cateName, cateCode, cateCodeRef
+ from item_category
+     start with cateCodeRef is null connect by prior cateCode = cateCodeRef
+</select>
+
+<!-- 상품추가 -->
+<insert id="addItem">
+insert into mall_item(item_num, item_name, item_price, item_allnumber, item_summary, item_date)
+	values(ITEM_NUM_SEQ.nextval, #{item_name},#{item_price}, #{item_allnumber}, #{item_summary}, sysdate)
+</insert>
+
+<!-- 상품목록 -->
+<select id="itemList" resultType="ven.spring.mall.model.MallItemVO">
+select
+	item_num, item_name, item_type, item_size, item_gender, item_price, item_allnumber, item_summary, item_date
+from mall_item
+	order by item_num desc
+</select>
+
+<!-- 상품조회 -->
+<select id="itemView" resultType="ven.spring.mall.model.MallItemVO">
+select item_num, item_name, item_price, item_allnumber, item_summary, item_date
+	from mall_item
+		where item_num = #{item_num}
+</select>
+
+
+
+</mapper>

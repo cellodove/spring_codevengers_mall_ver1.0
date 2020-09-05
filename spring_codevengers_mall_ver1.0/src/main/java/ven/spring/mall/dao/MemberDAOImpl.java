@@ -5,8 +5,6 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.sun.org.apache.xml.internal.utils.NameSpace;
-
 import ven.spring.mall.model.MemberVO;
 
 @Repository
@@ -22,7 +20,12 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public void signup(MemberVO memberVO) throws Exception {
 		sql.insert(namespace + ".signup",memberVO);
-		
+	}
+	
+	//로그인
+	@Override
+	public MemberVO login(MemberVO memberVO) throws Exception {
+		return sql.selectOne(namespace + ".login", memberVO);
 	}
 
 }
