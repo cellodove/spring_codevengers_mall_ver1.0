@@ -58,7 +58,8 @@
 					</div>
 
 					<div class="inputArea">
-						<button type="submit" id="register_Btn" class="btn btn-primary">등록</button>
+						 <button type="button" id="register_Btn" class="btn btn-warning">수정</button>
+						 <button type="button" id="register_Btn" class="btn btn-danger">삭제</button>
 					</div>
 				</form>
 			</div>
