@@ -17,8 +17,39 @@ public class MallItemVO {
 	private String item_summary;
 	private Date item_date;
 	private String item_picture;
+	private int item_catecode;
+	private String item_thumbImg;
+	
+	private String cateCodeRef;
+	private String cateName;
 	
 	
+	
+	
+	public String getCateCodeRef() {
+		return cateCodeRef;
+	}
+	public void setCateCodeRef(String cateCodeRef) {
+		this.cateCodeRef = cateCodeRef;
+	}
+	public String getCateName() {
+		return cateName;
+	}
+	public void setCateName(String cateName) {
+		this.cateName = cateName;
+	}
+	public int getItem_catecode() {
+		return item_catecode;
+	}
+	public void setItem_catecode(int item_catecode) {
+		this.item_catecode = item_catecode;
+	}
+	public String getItem_thumbImg() {
+		return item_thumbImg;
+	}
+	public void setItem_thumbImg(String item_thumbImg) {
+		this.item_thumbImg = item_thumbImg;
+	}
 	public int getItem_num() {
 		return item_num;
 	}

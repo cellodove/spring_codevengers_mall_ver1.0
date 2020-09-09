@@ -46,6 +46,22 @@ public class AdminDAOImpl implements AdminDAO {
 		return sql.selectOne(namespace + ".itemView", item_num);
 	}
 
+	//상품수정
+	@Override
+	public void itemModify(MallItemVO mallItemVO) throws Exception {
+		sql.update(namespace + ".itemModify", mallItemVO);		
+	}
+
+	//상품삭제
+	@Override
+	public void itemDelete(int item_num) throws Exception {
+		sql.delete(namespace + ".itemDelete", item_num);
+		
+	}
+
+
+
+
 	
 	
 }

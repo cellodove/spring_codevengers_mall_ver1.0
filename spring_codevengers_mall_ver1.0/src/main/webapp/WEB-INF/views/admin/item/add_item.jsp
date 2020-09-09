@@ -3,7 +3,36 @@
 
 <html>
 <head>
+<style>
+.select_img img {
+	margin: 20px 0;
+	width: 500px;
+	height: auto;
+}
+.inputArea { margin:10px 0; }
+select { width:100px; }
+label { display:inline-block; width:70px; padding:5px; }
+label[for='gdsDes'] { display:block; }
+input { width:150px; }
+textarea#gdsDes { width:400px; height:180px; }
+
+
+</style>
 <title>codevengers 관리자화면</title>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="/resources/ckeditor/ckeditor.js"></script>
+
+<script>
+var regExp = /[^0-9]/gi;
+
+$("#gdsPrice").keyup(function(){ numCheck($(this)); });
+$("#gdsStock").keyup(function(){ numCheck($(this)); });
+
+function numCheck(selector) {
+ var tempVal = selector.val();
+ selector.val(tempVal.replace(regExp, ""));
+}
+</script>
 </head>
 <body>
 	<div>
@@ -25,11 +54,16 @@
 			</aside>
 			<div id="container_box">
 				<h2>상품등록</h2>
-				<form role="form" method="post" autocomplete="off">
+				<form role="form" method="post" autocomplete="off"
+					enctype="multipart/form-data">
 
-					<label>1차 분류</label> <select class="category1">
+					<label>1차 분류</label> 
+					<select class="category1">
 						<option value="">전체</option>
-					</select> <label>2차 분류</label> <select class="category2">
+					</select> 
+					
+					<label>2차 분류</label> 
+					<select class="category2" name="item_catecode">
 						<option value="">전체</option>
 					</select>
 
@@ -51,7 +85,43 @@
 					<div class="inputArea">
 						<label for="gdsDes">상품소개</label>
 						<textarea rows="5" cols="50" id="gdsDes" name="item_summary"></textarea>
+
+						<script>
+							var ckeditor_config = {
+								resize_enaleb : false,
+								enterMode : CKEDITOR.ENTER_BR,
+								shiftEnterMode : CKEDITOR.ENTER_P,
+								filebrowserUploadUrl : "/admin/item/ckUpload"
+							};
+
+							CKEDITOR.replace("gdsDes", ckeditor_config);
+						</script>
+
 					</div>
+					<br />
+
+					<div class="inputArea">
+						<label>이미지</label> <input type="file" id="gdsImg" name="file" />
+						<div class="select_img">
+							<img src="" />
+						</div>
+					</div>
+					<script>
+						$("#gdsImg").change(
+								function() {
+									if (this.files && this.files[0]) {
+										var reader = new FileReader;
+										reader.onload = function(data) {
+											$(".select_img img").attr("src",
+													data.target.result).width(
+													500);
+										}
+										reader.readAsDataURL(this.files[0]);
+									}
+								});
+					</script>
+
+					<%=request.getRealPath("/")%>
 
 					<div class="inputArea">
 						<button type="submit" id="register_Btn" class="btn btn-primary">등록</button>
@@ -132,8 +202,7 @@
 											function() {
 
 												var selectVal = $(this).val();
-												cate2Select
-														.append("<option value=''>전체</option>");
+												cate2Select.append("<option value='" + selectVal + "'>전체</option>");
 
 												for (var i = 0; i < cate2Arr.length; i++) {
 													if (selectVal == cate2Arr[i].cateCodeRef) {

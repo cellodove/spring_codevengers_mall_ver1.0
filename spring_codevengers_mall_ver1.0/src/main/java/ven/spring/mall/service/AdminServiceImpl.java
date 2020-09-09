@@ -42,5 +42,18 @@ public class AdminServiceImpl implements AdminService {
 	public MallItemVO itemView(int item_num) throws Exception {
 		return adminDAO.itemView(item_num);
 	}
+	
+	//상품수정
+	@Override
+	public void itemModify(MallItemVO mallItemVO) throws Exception {
+		adminDAO.itemModify(mallItemVO);	
+	}
+	
+	//상품삭제
+	@Override
+	public void itemDelete(int item_num) throws Exception {
+		adminDAO.itemDelete(item_num);
+		
+	}
 
 }

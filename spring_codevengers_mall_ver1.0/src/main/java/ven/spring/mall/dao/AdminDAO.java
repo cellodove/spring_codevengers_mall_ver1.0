@@ -16,8 +16,12 @@ public interface AdminDAO {
 	//상품목록
 	public List<MallItemVO> itemList() throws Exception;
 	
-	//상품조회
+	//상품조회 + 카테고리 조인
 	public MallItemVO itemView(int item_num) throws Exception;
 	
+	//상품수정
+	public void itemModify(MallItemVO mallItemVO) throws Exception;
 
+	//상품삭제
+	public void itemDelete(int item_num) throws Exception;
 }

@@ -34,4 +34,5 @@
 	<context:component-scan base-package="ven.spring.mall.service"></context:component-scan>
 	<context:component-scan base-package="ven.spring.mall.model"></context:component-scan>
 	<context:component-scan base-package="ven.spring.mall.dao"></context:component-scan>
+	<context:component-scan base-package="ven.spring.mall.util"></context:component-scan>
 </beans>

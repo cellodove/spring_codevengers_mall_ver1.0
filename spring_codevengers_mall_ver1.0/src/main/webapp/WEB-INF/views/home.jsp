@@ -3,6 +3,7 @@
 <html>
 <head>
 	<title>codevengers mall</title>
+	
 </head>
 <body>
 <div>
@@ -11,6 +12,9 @@
 			<%@ include file="include/header.jsp" %>
 		</div>
 	</header>
+	<aside>
+		<%@ include file="include/aside.jsp"%>
+	</aside>
 	
 	<nav>
 		<div>

@@ -19,5 +19,9 @@ public interface AdminService {
 	//상품조회
 	public MallItemVO itemView(int item_num) throws Exception;
 	
+	//상품수정
+	public void itemModify(MallItemVO mallItemVO) throws Exception;
 
+	//상품삭제
+	public void itemDelete(int item_num) throws Exception;
 }

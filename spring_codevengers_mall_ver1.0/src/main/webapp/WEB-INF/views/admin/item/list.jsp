@@ -7,6 +7,7 @@
 <title>codevengers 관리자화면</title>
 <style>
 #container_box table td { width:100px; }
+#container_box table img {width: 150px; height: auto;}
 </style>
 </head>
 <body>
@@ -32,6 +33,7 @@
 				<table>
 					<thead>
 						<tr>
+							<th>사진</th>
 							<th>번호</th>
 							<th>이름</th>
 							<th>종류</th>
@@ -45,11 +47,15 @@
 					<tbody>
 						<c:forEach items="${list}" var="list">
 							<tr>
+								<td>
+									<img src="${list.item_thumbImg}">
+								</td>
+							
 								<td>${list.item_num}</td>
 								<td>
 									<a href="/admin/item/view?n=${list.item_num}">${list.item_name}</a>								
 								</td>
-								<td>${list.item_type}</td>
+								<td>${list.item_catecode}</td>
 								<td>${list.item_size}</td>
 								<td>${list.item_gender}</td>
 								<td>

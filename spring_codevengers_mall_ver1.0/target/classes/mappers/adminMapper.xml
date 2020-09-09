@@ -14,24 +14,50 @@
 
 <!-- 상품추가 -->
 <insert id="addItem">
-insert into mall_item(item_num, item_name, item_price, item_allnumber, item_summary, item_date)
-	values(ITEM_NUM_SEQ.nextval, #{item_name},#{item_price}, #{item_allnumber}, #{item_summary}, sysdate)
+insert into mall_item(item_num, item_name, item_catecode, item_price, item_allnumber, item_summary, item_date, item_picture, item_thumbImg)
+	values(ITEM_NUM_SEQ.nextval, #{item_name}, #{item_catecode},#{item_price}, #{item_allnumber}, #{item_summary}, sysdate, #{item_picture}, #{item_thumbImg})
 </insert>
 
 <!-- 상품목록 -->
 <select id="itemList" resultType="ven.spring.mall.model.MallItemVO">
 select
-	item_num, item_name, item_type, item_size, item_gender, item_price, item_allnumber, item_summary, item_date
+	item_num, item_name, item_catecode ,item_type, item_size, item_gender, item_price, item_allnumber, item_summary, item_date, item_picture, item_thumbImg
 from mall_item
 	order by item_num desc
 </select>
 
 <!-- 상품조회 -->
 <select id="itemView" resultType="ven.spring.mall.model.MallItemVO">
-select item_num, item_name, item_price, item_allnumber, item_summary, item_date
-	from mall_item
-		where item_num = #{item_num}
+ select item_num, item_name, item_cateCode, item_price, item_allnumber, item_summary, item_picture, item_thumbImg, item_date
+     from mall_item
+         where item_num = #{item_num}
 </select>
+
+<!-- 상품수정 -->
+<update id="itemModify">
+	update mall_item
+		set
+			item_name = #{item_name},
+			item_catecode = #{item_catecode},
+			item_price = #{item_price},
+			item_allnumber = #{item_allnumber},
+			item_summary = #{item_summary},
+			item_picture = #{item_picture},
+			item_thumbImg = #{item_thumbImg}
+		where item_num = ${item_num}
+
+</update>
+
+<!-- 상품삭제 -->
+<delete id="itemDelete">
+delete
+	mall_item
+where item_num = #{item_num}
+</delete>
+
+
+
+
 
 
 
