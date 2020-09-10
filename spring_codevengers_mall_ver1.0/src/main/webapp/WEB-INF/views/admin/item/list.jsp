@@ -33,10 +33,10 @@
 				<table>
 					<thead>
 						<tr>
-							<th>사진</th>
+							<th>썸네일</th>
 							<th>번호</th>
 							<th>이름</th>
-							<th>종류</th>
+							<th>카테고리</th>
 							<th>크기</th>
 							<th>성별</th>
 							<th>가격</th>
@@ -55,7 +55,7 @@
 								<td>
 									<a href="/admin/item/view?n=${list.item_num}">${list.item_name}</a>								
 								</td>
-								<td>${list.item_catecode}</td>
+								<td>${list.cateName}</td>
 								<td>${list.item_size}</td>
 								<td>${list.item_gender}</td>
 								<td>

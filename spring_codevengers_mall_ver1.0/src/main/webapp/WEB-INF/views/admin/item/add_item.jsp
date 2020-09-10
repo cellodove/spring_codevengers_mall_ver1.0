@@ -136,7 +136,6 @@ function numCheck(selector) {
 			</div>
 		</footer>
 	</div>
-	<script type="text/javascript"></script>
 	<script>
 		// 컨트롤러에서 데이터 받기
 		var jsonData = JSON.parse('${category}');

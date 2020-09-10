@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import net.sf.json.JSONArray;
 import ven.spring.mall.model.CategoryVO;
 import ven.spring.mall.model.MallItemVO;
+import ven.spring.mall.model.ItemViewVO;
 import ven.spring.mall.service.AdminService;
 import ven.spring.mall.util.UploadFileUtil;
 
@@ -87,7 +88,7 @@ public class AdminController extends HttpServlet {
 	@RequestMapping(value = "/item/list", method = RequestMethod.GET)
 	public void getItemList(Model model) throws Exception {
 		logger.info("get item list");
-		List<MallItemVO> list = adminService.itemList();
+		List<ItemViewVO> list = adminService.itemList();
 		model.addAttribute("list", list);
 	}
 
@@ -96,7 +97,7 @@ public class AdminController extends HttpServlet {
 	public void getItemView(@RequestParam("n") int item_num, Model model) throws Exception {
 		logger.info("get item view");
 
-		MallItemVO mallItem = adminService.itemView(item_num);
+		ItemViewVO mallItem = adminService.itemView(item_num);
 		model.addAttribute("mallItem", mallItem);
 	}
 
@@ -105,7 +106,7 @@ public class AdminController extends HttpServlet {
 	public void getItemModify(@RequestParam("n") int item_num, Model model) throws Exception {
 		logger.info("get item view");
 
-		MallItemVO mallItem = adminService.itemView(item_num);
+		ItemViewVO mallItem = adminService.itemView(item_num);
 		model.addAttribute("mallItem", mallItem);
 
 		List<CategoryVO> category = null;
@@ -120,7 +121,7 @@ public class AdminController extends HttpServlet {
 		logger.info("post item modify");
 
 		// 새로운 파일이 등록되었는지 확인
-		if (file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
+		if (file.getOriginalFilename()!= null && !file.getOriginalFilename().equals("")) {
 			// 기존 파일을 삭제
 			new File(uploadPath + req.getParameter("item_picture")).delete();
 			new File(uploadPath + req.getParameter("item_thumbImg")).delete();

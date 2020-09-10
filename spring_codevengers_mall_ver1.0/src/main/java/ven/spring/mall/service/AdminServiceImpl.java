@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import ven.spring.mall.dao.AdminDAO;
 import ven.spring.mall.model.CategoryVO;
 import ven.spring.mall.model.MallItemVO;
+import ven.spring.mall.model.ItemViewVO;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -31,7 +32,7 @@ public class AdminServiceImpl implements AdminService {
 	
 	//상품목록
 	@Override
-	public List<MallItemVO> itemList() throws Exception {
+	public List<ItemViewVO> itemList() throws Exception {
 		System.out.println("서비스");
 		return adminDAO.itemList();
 	}
@@ -39,7 +40,7 @@ public class AdminServiceImpl implements AdminService {
 	
 	//상품조회
 	@Override
-	public MallItemVO itemView(int item_num) throws Exception {
+	public ItemViewVO itemView(int item_num) throws Exception {
 		return adminDAO.itemView(item_num);
 	}
 	

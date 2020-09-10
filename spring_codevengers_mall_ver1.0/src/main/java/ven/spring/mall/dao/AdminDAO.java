@@ -4,6 +4,7 @@ import java.util.List;
 
 import ven.spring.mall.model.CategoryVO;
 import ven.spring.mall.model.MallItemVO;
+import ven.spring.mall.model.ItemViewVO;
 
 public interface AdminDAO {
 
@@ -14,10 +15,10 @@ public interface AdminDAO {
 	public void addItem(MallItemVO mallItemVO) throws Exception;
 
 	//상품목록
-	public List<MallItemVO> itemList() throws Exception;
+	public List<ItemViewVO> itemList() throws Exception;
 	
 	//상품조회 + 카테고리 조인
-	public MallItemVO itemView(int item_num) throws Exception;
+	public ItemViewVO itemView(int item_num) throws Exception;
 	
 	//상품수정
 	public void itemModify(MallItemVO mallItemVO) throws Exception;

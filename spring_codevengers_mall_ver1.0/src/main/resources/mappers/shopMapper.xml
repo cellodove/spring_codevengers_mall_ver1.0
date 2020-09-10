@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ven.codevengers.mappers.shopMapper">
+
+<!-- 카테고리별 상품 리스트 -->
+<!-- <select id="list" resultType="ven.spring.mall.model.ItemViewVO">
+select
+    g.item_num, g.item_name, g.item_cateCode, c.cateCodeRef, c.cateName, item_price, item_allnumber, item_summary, item_picture, item_date, g.item_picture, g.item_thumbImg
+        from mall_item g
+            inner join item_category c
+                on g.item_cateCode = c.cateCode           
+            where g.item_cateCode = #{item_cateCode}
+</select> -->
+
+
+<!-- 카테고리별 상품 리스트 : 1차 분류 -->
+<select id="list_1" resultType="ven.spring.mall.model.ItemViewVO">
+select
+    g.item_num, g.item_name, g.item_cateCode, c.cateCodeRef, c.cateName,
+    item_price, item_allnumber, item_summary, item_picture, item_date, g.item_picture, g.item_thumbImg
+        from mall_item g
+            inner join item_category c
+                on g.item_cateCode = c.cateCode           
+            where g.item_cateCode = #{item_cateCode}
+             or c.cateCodeRef = #{cateCodeRef}
+</select>
+
+<!-- 카테고리별 상품 리스트 : 2차 분류 -->
+<select id="list_2" resultType="ven.spring.mall.model.ItemViewVO">
+select
+    g.item_num, g.item_name, g.item_cateCode, c.cateCodeRef, c.cateName,
+    item_price, item_allnumber, item_summary, item_picture, item_date, g.item_picture, g.item_thumbImg
+        from mall_item g
+            inner join item_category c
+                on g.item_cateCode = c.cateCode           
+            where g.item_cateCode = #{item_cateCode}
+</select>
+
+
+
+
+
+</mapper>

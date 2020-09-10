@@ -19,19 +19,58 @@ insert into mall_item(item_num, item_name, item_catecode, item_price, item_allnu
 </insert>
 
 <!-- 상품목록 -->
-<select id="itemList" resultType="ven.spring.mall.model.MallItemVO">
+<!-- <select id="itemList" resultType="ven.spring.mall.model.MallItemVO">
 select
 	item_num, item_name, item_catecode ,item_type, item_size, item_gender, item_price, item_allnumber, item_summary, item_date, item_picture, item_thumbImg
 from mall_item
 	order by item_num desc
+</select> -->
+
+<select id="itemList" resultType="ven.spring.mall.model.ItemViewVO">
+ select
+     g.item_num, g.item_name, g.item_catecode, c.cateCodeRef, c.cateName, item_price, item_allnumber, item_summary, item_picture, item_date, g.item_picture, g.item_thumbImg
+         from mall_item g
+             inner join item_category c
+                 on g.item_cateCode = c.cateCode
 </select>
 
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- 상품조회 -->
-<select id="itemView" resultType="ven.spring.mall.model.MallItemVO">
+<!-- <select id="itemView" resultType="ven.spring.mall.model.MallItemVO">
  select item_num, item_name, item_cateCode, item_price, item_allnumber, item_summary, item_picture, item_thumbImg, item_date
      from mall_item
          where item_num = #{item_num}
+</select> -->
+
+
+<!-- 상품 조회 + 카테고리 조인-->
+<select id="itemView" resultType="ven.spring.mall.model.ItemViewVO">
+ select
+     g.item_num, g.item_name, g.item_catecode, c.cateCodeRef, c.cateName, item_price, item_allnumber, item_summary, item_picture, item_date, g.item_picture, g.item_thumbImg
+         from mall_item g
+             inner join item_category c
+                 on g.item_cateCode = c.cateCode          
+            where g.item_num = #{item_num}
 </select>
+
+
+
+
+
+
+
+
 
 <!-- 상품수정 -->
 <update id="itemModify">

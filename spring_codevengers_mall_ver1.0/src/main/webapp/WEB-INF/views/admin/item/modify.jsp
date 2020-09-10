@@ -32,9 +32,13 @@
 				<h2>상품등록</h2>
 				<form role="form" method="post" autocomplete="off" enctype="multipart/form-data">
 					<input type="hidden" name="n" value="${mallItem.item_num}">
-					<label>1차 분류</label> <select class="category1">
+					<label>1차 분류</label> 
+					<select class="category1">
 						<option value="">전체</option>
-					</select> <label>2차 분류</label> <select class="category2">
+					</select> 
+					
+					<label>2차 분류</label> 
+					<select class="category2" name="item_catecode">
 						<option value="">전체</option>
 					</select>
 
@@ -133,7 +137,6 @@
 			</div>
 		</footer>
 	</div>
-	<script type="text/javascript"></script>
 	<script>
 		// 컨트롤러에서 데이터 받기
 		var jsonData = JSON.parse('${category}');
@@ -184,14 +187,6 @@
 							}
 
 							var cate2Select = $("select.category2");
-
-							/*
-							for(var i = 0; i < cate2Arr.length; i++) {
-							  cate2Select.append("<option value='" + cate2Arr[i].cateCode + "'>"
-							       + cate2Arr[i].cateName + "</option>");
-							}
-							 */
-
 							cate2Select.children().remove();
 
 							$("option:selected", this)

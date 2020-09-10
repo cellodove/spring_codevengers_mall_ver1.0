@@ -61,7 +61,7 @@
 					<div class="inputArea">
 						<label for="gdsDes">상품소개</label> 
 						<%-- <span>${mallItem.item_summary}</span> --%>
-						<div class="gdsDes">${item.item_summary}</div>
+						<div class="gdsDes">${mallItem.item_summary}</div>
 					</div>
 
 					<div>

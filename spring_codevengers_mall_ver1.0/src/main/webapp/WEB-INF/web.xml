@@ -61,4 +61,14 @@
     <servlet-name>AdminController</servlet-name>
     <url-pattern>/AdminController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ShopController</display-name>
+    <servlet-name>ShopController</servlet-name>
+    <servlet-class>ven.spring.mall.controller.ShopController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShopController</servlet-name>
+    <url-pattern>/ShopController</url-pattern>
+  </servlet-mapping>
 </web-app>
