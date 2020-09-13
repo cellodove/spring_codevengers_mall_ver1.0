@@ -37,6 +37,41 @@ select
 </select>
 
 
+<!-- 상품 조회 + 카테고리 조인-->
+<select id="itemView" resultType="ven.spring.mall.model.ItemViewVO">
+ select
+     g.item_num, g.item_name, g.item_catecode, c.cateCodeRef, c.cateName, item_price, item_allnumber, item_summary, item_picture, item_date, g.item_picture, g.item_thumbImg
+         from mall_item g
+             inner join item_category c
+                 on g.item_cateCode = c.cateCode          
+            where g.item_num = #{item_num}
+</select>
+
+
+<!-- 상품 소감(댓글) 작성 -->
+<insert id="addReview">
+ insert into review_board (item_num, mem_id, rbrd_num, rbrd_content, rbrd_date)
+     values (#{item_num}, #{mem_id}, REVIEW_SEQ.nextval, #{rbrd_content}, sysdate)
+</insert>
+
+
+<!-- 상품 소감(댓글) 리스트 -->
+<select id="reviewList" resultType="ven.spring.mall.model.ReviewBoardListVO">
+ select
+     r.item_num, r.mem_id, r.rbrd_num, r.rbrd_content, r.rbrd_date, m.mem_name
+ from review_board r
+     inner join member m
+         on r.mem_id = m.mem_id
+     where item_num = #{item_num}
+</select>
+
+
+
+
+
+
+
+
 
 
 
