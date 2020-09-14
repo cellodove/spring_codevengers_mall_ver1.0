@@ -18,13 +18,26 @@ function reviewList(){
    var rbrd_date = new Date(this.rbrd_date);
    rbrd_date = rbrd_date.toLocaleDateString("ko-US")
    
-   str += "<li data-item_date='" + this.item_date + "'>"
+   str += "<li data-rbrd_num='" + this.rbrd_num + "'>"
      + "<div class='userInfo'>"
      + "<span class='userName'>" + this.mem_name + "</span>"
      + "<span class='date'>" + rbrd_date + "</span>"
      + "</div>"
      + "<div class='replyContent'>" + this.rbrd_content + "</div>"
-     + "</li>";           
+     
+     +"<c:if test='${member != null}' >"
+     
+     + "<div class='replyFooter'>"
+     + "<button type='button' class='modify' data-rbrd_num='" + this.rbrd_num + "'>M</button>"
+     + "<button type='button' class='delete' data-rbrd_num='" + this.rbrd_num + "'>D</button>"
+     + "</div>"
+     
+     +"</c:if>"
+     
+     
+     
+     + "</li>";  
+     
   });
   
   $("section.replyList ol").html(str);
@@ -98,6 +111,16 @@ function reviewList(){
  section.replyList div.userInfo .userName { font-size:24px; font-weight:bold; }
  section.replyList div.userInfo .date { color:#999; display:inline-block; margin-left:10px; }
  section.replyList div.replyContent { padding:10px; margin:20px 0; }
+
+ section.replyList div.replyFooter button { font-size:14px; border: 1px solid #999; background:none; margin-right:10px; }
+</style>
+<style>
+ div.replyModal { position:relative; z-index:1; display: none;}
+ div.modalBackground { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.8); z-index:-1; }
+ div.modalContent { position:fixed; top:20%; left:calc(50% - 250px); width:500px; height:250px; padding:20px 10px; background:#fff; border:2px solid #666; }
+ div.modalContent textarea { font-size:16px; font-family:'맑은 고딕', verdana; padding:10px; width:500px; height:200px; }
+ div.modalContent button { font-size:20px; padding:5px 10px; margin:10px 0; background:#fff; border:1px solid #ccc; }
+ div.modalContent button.modal_cancel { margin-left:20px; }
 </style>	
 </head>
 <body>
@@ -179,9 +202,57 @@ function reviewList(){
 				</p>
   
   				<p class="addToCart">
-   					<button type="button">카트에 담기</button>
+   					<button type="button" class="addCart_btn">카트에 담기</button>
+ 					
+ 					<script>
+  					$(".addCart_btn").click(function(){
+   						var item_num = $("#gdsNum").val();
+   						var wishList_stock = $(".numBox").val();
+      
+   						var data = {
+   							item_num : item_num,
+   							wishList_stock : wishList_stock
+     						};
+   
+  						 $.ajax({
+   							 url : "/shop/view/addWishList",
+   							 type : "post",
+    						 data : data,
+    						 success : function(result){
+    							 if (result == 1) {
+    								alert("카트 담기 성공");
+    	     						$(".numBox").val("1");
+								} else {
+									alert("회원만 사용할수있습니다.");
+    	     						$(".numBox").val("1");
+								}
+    							 
+    							 
+     							
+    						},
+    						error : function(){
+     							alert("카트 담기 실패");
+    						}
+   						});
+ 					 });
+					 </script>
+ 				
+ 				
+ 				
+ 				
+ 				
+ 				
+ 				
+ 				
+ 				
  				</p>
  				</div>
+ 				
+ 				
+ 				
+ 				
+ 				
+ 				
  				
  				<div class="gdsDes">
  					${view.item_summary}
@@ -226,7 +297,7 @@ function reviewList(){
    }
   });
  });
-</script>
+							</script>
   							
   							
   							
@@ -258,6 +329,45 @@ function reviewList(){
    							reviewList();
    						</script>
    						
+   						<script>	
+   						
+   							 $(document).on("click", ".modify", function(){
+   							 $(".replyModal").fadeIn(200);
+   							 var rbrd_num = $(this).attr("data-rbrd_num");
+   							 var rbrd_content = $(this).parent().parent().children(".replyContent").text();
+   						 
+   							 $(".modal_repCon").val(rbrd_content);
+   							 $(".modal_modify_btn").attr("data-rbrd_num", rbrd_num);
+   							 
+   							});
+   						
+   							 
+   							
+
+   							
+   							$(document).on("click",".delete", function() {
+   								var deletConfirm = confirm("정말로 삭제 하시겠습니까");
+   								if(deletConfirm){
+								var data = {rbrd_num : $(this).attr("data-rbrd_num")};
+								$.ajax({
+									url : "/shop/view/deleteReview",
+									type : "post",
+									data : data,
+									success : function(result) {
+										if (result == 1) {
+											reviewList();
+										} else {
+											alert("작성자 본인만 할 수 있습니다.")
+										}
+									},
+									error : function() {
+										alert("로그인 하셔야합니다.")
+									}
+								});
+   								}
+							});
+   						</script>
+   						
    						
    						
   						</ol>    
@@ -277,5 +387,64 @@ function reviewList(){
 	</footer>
 
 </div>
+
+<div class="replyModal">
+
+ <div class="modalContent">
+  
+  <div>
+   <textarea class="modal_repCon" name="modal_repCon"></textarea>
+  </div>
+  
+  <div>
+   <button type="button" class="modal_modify_btn">수정</button>
+   <button type="button" class="modal_cancel">취소</button>
+  </div>
+  
+ </div>
+
+ <div class="modalBackground"></div>
+ 
+</div>
+<script></script>
+
+<script>
+$(".modal_cancel").click(function(){
+ $(".replyModal").fadeOut(200);
+});
+
+$(".modal_modify_btn").click(function(){
+		 var modifyConfirm = confirm("정말로 수정하시겠습니까?");
+		 
+		 if(modifyConfirm) {
+		  var data = {
+			 rbrd_num : $(this).attr("data-rbrd_num"),
+		     rbrd_content : $(".modal_repCon").val()
+		    };  // ReplyVO 형태로 데이터 생성
+		  
+		  $.ajax({
+		   url : "/shop/view/modifyReview",
+		   type : "post",
+		   data : data,
+		   success : function(result){
+		    
+		    if(result == 1) {
+		     replyList();
+		     $(".replyModal").fadeOut(200);
+		     
+		    } else {
+		     alert("작성자 본인만 할 수 있습니다.");       
+		    }
+		   },
+		   error : function(){
+		    alert("로그인하셔야합니다.")
+		   }
+		  });
+		 }
+		 
+		});
+</script>
+
+
 </body>
 </html>

@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import ven.spring.mall.model.ItemViewVO;
 import ven.spring.mall.model.ReviewBoardListVO;
 import ven.spring.mall.model.ReviewBoardVO;
+import ven.spring.mall.model.WishListListVO;
+import ven.spring.mall.model.WishListVO;
 @Repository
 public class ShopDAOImpl implements ShopDAO {
 	
@@ -55,6 +57,39 @@ public class ShopDAOImpl implements ShopDAO {
 	@Override
 	public List<ReviewBoardListVO> reviewList(int item_num) throws Exception {
 		return sql.selectList(namespace + ".reviewList", item_num);
+	}
+
+	//상품 댓글 삭제
+	@Override
+	public void deleteReview(ReviewBoardVO reviewBoardVO) throws Exception {
+		sql.delete(namespace + ".deleteReview", reviewBoardVO);
+		
+	}
+
+	//아이디 체크
+	@Override
+	public String idCheck(int rbrd_num) throws Exception {
+		return sql.selectOne(namespace + ".reviewIdCheck", rbrd_num);
+	}
+
+	//상품 댓글 수정
+	@Override
+	public void modifyReview(ReviewBoardVO reviewBoardVO) throws Exception {
+		sql.update(namespace + ".modifyReview", reviewBoardVO);
+		
+	}
+
+	//장바구니 담기
+	@Override
+	public void addWishList(WishListVO wishListVO) throws Exception {
+		sql.insert(namespace + ".addWishList", wishListVO);
+		
+	}
+
+	//장바구니 리스트
+	@Override
+	public List<WishListListVO> wishListList(String mem_id) throws Exception {
+		return sql.selectList(namespace + ".wishListList" , mem_id);
 	}
 }
 

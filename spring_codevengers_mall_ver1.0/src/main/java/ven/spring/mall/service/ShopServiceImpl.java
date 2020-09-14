@@ -10,6 +10,8 @@ import ven.spring.mall.dao.ShopDAO;
 import ven.spring.mall.model.ItemViewVO;
 import ven.spring.mall.model.ReviewBoardListVO;
 import ven.spring.mall.model.ReviewBoardVO;
+import ven.spring.mall.model.WishListListVO;
+import ven.spring.mall.model.WishListVO;
 @Service
 public class ShopServiceImpl implements ShopService {
 	
@@ -47,6 +49,39 @@ public class ShopServiceImpl implements ShopService {
 	@Override
 	public List<ReviewBoardListVO> reviewList(int item_num) throws Exception {
 		return shopDAO.reviewList(item_num);
+	}
+
+	//상품 댓글삭제
+	@Override
+	public void deleteReview(ReviewBoardVO reviewBoardVO) throws Exception {
+		shopDAO.deleteReview(reviewBoardVO);
+		
+	}
+	
+	//아이디 체크
+	@Override
+	public String idCheck(int rbrd_num) throws Exception {
+		return shopDAO.idCheck(rbrd_num);
+	}
+	
+	//상품 댓글 수정
+	@Override
+	public void modifyReview(ReviewBoardVO reviewBoardVO) throws Exception {
+		shopDAO.modifyReview(reviewBoardVO);
+		
+	}
+	
+	//장바구니 담기
+	@Override
+	public void addWishList(WishListVO wishListVO) throws Exception {
+		shopDAO.addWishList(wishListVO);
+		
+	}
+	
+	//장바구니 리스트
+	@Override
+	public List<WishListListVO> wishListList(String mem_id) throws Exception {
+		return shopDAO.wishListList(mem_id);
 	}
 
 }
