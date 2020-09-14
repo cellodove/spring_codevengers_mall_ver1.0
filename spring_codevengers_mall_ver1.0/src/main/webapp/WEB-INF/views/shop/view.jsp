@@ -5,6 +5,32 @@
 <head>
 	<title>codevengers mall</title>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script> 
+function reviewList(){
+ var item_num = ${view.item_num};
+ $.getJSON("/shop/view/reviewList" + "?n=" + item_num, function(data){
+  var str = "";
+  
+  $(data).each(function(){
+   
+   console.log(data);
+   
+   var rbrd_date = new Date(this.rbrd_date);
+   rbrd_date = rbrd_date.toLocaleDateString("ko-US")
+   
+   str += "<li data-item_date='" + this.item_date + "'>"
+     + "<div class='userInfo'>"
+     + "<span class='userName'>" + this.mem_name + "</span>"
+     + "<span class='date'>" + rbrd_date + "</span>"
+     + "</div>"
+     + "<div class='replyContent'>" + this.rbrd_content + "</div>"
+     + "</li>";           
+  });
+  
+  $("section.replyList ol").html(str);
+ });
+}
+</script>
 <style>
 
  body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
@@ -167,15 +193,46 @@
 					</c:if>
 					
 					<c:if test="${member != null }">
+					
 					 <section class="replyForm">
   					<form role="form" method="post" autocomplete="off">
-  						<input type="hidden" name="item_num" value="${view.item_num}">
+  						<input type="hidden" name="item_num" id="gdsNum" value="${view.item_num}">
   						<div class="input_area">
   							<textarea name="rbrd_content" id="repCon"></textarea>
   						</div>
   						
   						<div class="input_area">
-  							<button type="submit" id="reply_btn">소감남기기</button>
+  							<button type="button" id="reply_btn">소감남기기</button>
+  							
+  							<script>
+ $("#reply_btn").click(function(){
+  
+  var formObj = $(".replyForm form[role='form']");
+  var item_num = $("#gdsNum").val();
+  var rbrd_content = $("#repCon").val()
+  
+  var data = {
+	  item_num : item_num,
+	  rbrd_content : rbrd_content
+    };
+  
+  $.ajax({
+   url : "/shop/view/addReview",
+   type : "post",
+   data : data,
+   success : function(){
+	  reviewList();
+	  $("#repCon").val("");
+   }
+  });
+ });
+</script>
+  							
+  							
+  							
+  							
+  							
+  							
   						</div>
 
   					</form>
@@ -185,7 +242,7 @@
  
  					<section class="replyList">
   						<ol>
-  						 <c:forEach items="${reply}" var="reply">
+  						<%--  <c:forEach items="${reply}" var="reply">
 
   						<li>
       						<div class="userInfo">
@@ -195,7 +252,14 @@
      					
       						<div class="replyContent">${reply.rbrd_content}</div>
     					</li>
-   						</c:forEach>
+   						</c:forEach> --%>
+   						
+   						<script>
+   							reviewList();
+   						</script>
+   						
+   						
+   						
   						</ol>    
  					</section>
 				</div>

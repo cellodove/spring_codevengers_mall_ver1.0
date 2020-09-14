@@ -50,36 +50,63 @@ public class ShopController extends HttpServlet {
 		model.addAttribute("view", itemViewVO);
 		
 		
-		 List<ReviewBoardListVO> reply = shopService.reviewList(item_num);
-		 model.addAttribute("reply", reply);
+		/*
+		  List<ReviewBoardListVO> reply = shopService.reviewList(item_num);
+		  model.addAttribute("reply", reply);
+		 */
 		 
 	}
 	
-	//상품조회 - 댓글 작성
-	@RequestMapping(value = "/view" , method = RequestMethod.POST)
-	public String addReview(ReviewBoardVO reviewBoardVO, HttpSession session) throws Exception {
-		logger.info("addReview");
-		
-		MemberVO memberVO = (MemberVO)session.getAttribute("member");
-		reviewBoardVO.setMem_id(memberVO.getMem_id());
-		shopService.addReview(reviewBoardVO);
-		
-		return "redirect:/shop/view?n=" + reviewBoardVO.getItem_num();
-	}
-	
 	/*
-	 * // 상품 소감(댓글) 목록
+	 * //상품조회 - 댓글 작성
 	 * 
-	 * @ResponseBody
+	 * @RequestMapping(value = "/view" , method = RequestMethod.POST) public String
+	 * addReview(ReviewBoardVO reviewBoardVO, HttpSession session) throws Exception
+	 * { logger.info("addReview");
 	 * 
-	 * @RequestMapping(value = "/view/reviewList", method = RequestMethod.GET)
-	 * public List<ReviewBoardListVO> getReviewList(@RequestParam("n") int item_num)
-	 * throws Exception { logger.info("get reply list");
+	 * MemberVO memberVO = (MemberVO)session.getAttribute("member");
+	 * reviewBoardVO.setMem_id(memberVO.getMem_id());
+	 * shopService.addReview(reviewBoardVO);
 	 * 
-	 * List<ReviewBoardListVO> reply = shopService.reviewList(item_num);
-	 * 
-	 * return reply; }
+	 * return "redirect:/shop/view?n=" + reviewBoardVO.getItem_num(); }
 	 */
+	
+	
+	// 상품 소감(댓글) 작성
+	@ResponseBody
+	@RequestMapping(value = "/view/addReview", method = RequestMethod.POST)
+	public void addReview(ReviewBoardVO reviewBoardVO,  HttpSession session) throws Exception {
+	 logger.info("add Review");
+	 
+	 MemberVO member = (MemberVO)session.getAttribute("member");
+	 reviewBoardVO.setMem_id(member.getMem_id());
+	 
+	 shopService.addReview(reviewBoardVO);
+	} 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	 // 상품 소감(댓글) 목록
+	 
+	  @ResponseBody
+	  
+	  @RequestMapping(value = "/view/reviewList", method = RequestMethod.GET)
+	  public List<ReviewBoardListVO> getReviewList(@RequestParam("n") int item_num)
+	  throws Exception { logger.info("get reply list");
+	  
+	  List<ReviewBoardListVO> reply = shopService.reviewList(item_num);
+	  
+	  return reply; }
+	 
 	
 	
 }

@@ -45,7 +45,7 @@
 
 	<!-- 업로드 패스 설정 -->
 	<beans:bean class="java.lang.String" id="uploadPath">
-		<beans:constructor-arg	value="C:\spring_work1\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\spring_codevengers_mall_ver1.0\resources" />
+		<beans:constructor-arg	value="C:\spring_work2\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\spring_codevengers_mall_ver1.0\resources" />
 		
 	</beans:bean>
 
