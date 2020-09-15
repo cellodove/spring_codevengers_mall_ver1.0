@@ -83,5 +83,11 @@ public class ShopServiceImpl implements ShopService {
 	public List<WishListListVO> wishListList(String mem_id) throws Exception {
 		return shopDAO.wishListList(mem_id);
 	}
+	
+	//장바구니 삭제
+	@Override
+	public void deleteWishList(WishListVO wishListVO) throws Exception {
+		shopDAO.deleteWishList(wishListVO);
+	}
 
 }

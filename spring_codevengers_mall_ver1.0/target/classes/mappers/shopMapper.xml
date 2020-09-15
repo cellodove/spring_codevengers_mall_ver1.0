@@ -107,8 +107,12 @@ update review_board
 </select>
 
 
-
-
+<!-- 장바구니 삭제 -->
+<delete id="deleteWishList">
+delete item_wishlist
+	where wishlist_num = #{wishlist_num}
+		and mem_id = #{mem_id}
+</delete>
 
 
 

@@ -15,6 +15,7 @@
 			<li><a href="/admin/index">관리자 화면</a></li>
 		</c:if>
 		<li>${member.mem_id}님 환영합니다.</li>
+		<li><a href="/shop/wishListList">장바구니</a></li>
 		<li><a href="/member/logout">로그아웃</a></li>
 
 

@@ -91,6 +91,12 @@ public class ShopDAOImpl implements ShopDAO {
 	public List<WishListListVO> wishListList(String mem_id) throws Exception {
 		return sql.selectList(namespace + ".wishListList" , mem_id);
 	}
+
+	//장바구니 삭제
+	@Override
+	public void deleteWishList(WishListVO wishListVO) throws Exception {
+		sql.delete(namespace + ".deleteWishList", wishListVO);
+	}
 }
 
 

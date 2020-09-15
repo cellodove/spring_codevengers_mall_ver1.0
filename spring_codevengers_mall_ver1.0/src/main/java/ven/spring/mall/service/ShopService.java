@@ -36,4 +36,7 @@ public interface ShopService {
 	
 	//장바구니 리스트
 	public List<WishListListVO> wishListList(String mem_id) throws Exception;
+	
+	//장바구니 삭제
+	public void deleteWishList(WishListVO wishListVO) throws Exception;
 }

@@ -185,7 +185,31 @@ public class ShopController extends HttpServlet {
 	   
 	  }
 	  
-	  
+	  // 장바구니 삭제
+	  @ResponseBody
+	  @RequestMapping(value = "/deleteWishList", method = RequestMethod.POST)
+	  public int deleteCart(HttpSession session, @RequestParam(value = "chbox[]") List<String> chArr, WishListVO wishListVO) throws Exception {
+	   logger.info("delete wishlist");
+	   
+	   MemberVO memberVO = (MemberVO)session.getAttribute("member");
+	   String mem_id = memberVO.getMem_id();
+	   
+	   int result = 0;
+	   int wishList_num = 0;
+	   
+	   
+	   if(memberVO != null) {
+		   wishListVO.setMem_id(mem_id);;
+	    
+	    for(String i : chArr) {   
+	     wishList_num = Integer.parseInt(i);
+	     wishListVO.setWishlist_num(wishList_num);;
+	     shopService.deleteWishList(wishListVO);;
+	    }   
+	    result = 1;
+	   }  
+	   return result;  
+	  }
 	  
 	  
 	  
