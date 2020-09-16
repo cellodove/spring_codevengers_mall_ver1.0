@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import ven.spring.mall.dao.AdminDAO;
 import ven.spring.mall.model.CategoryVO;
 import ven.spring.mall.model.MallItemVO;
+import ven.spring.mall.model.MallOrderListVO;
+import ven.spring.mall.model.MallOrderVO;
 import ven.spring.mall.model.ItemViewVO;
 
 @Service
@@ -55,6 +57,18 @@ public class AdminServiceImpl implements AdminService {
 	public void itemDelete(int item_num) throws Exception {
 		adminDAO.itemDelete(item_num);
 		
+	}
+
+	//주문목록
+	@Override
+	public List<MallOrderVO> orderList() throws Exception {
+		return adminDAO.orderList(); 
+	}
+	
+	//특정주문목록
+	@Override
+	public List<MallOrderListVO> orderView(MallOrderVO mallOrderVO) throws Exception {
+		return adminDAO.orderView(mallOrderVO);
 	}
 
 }

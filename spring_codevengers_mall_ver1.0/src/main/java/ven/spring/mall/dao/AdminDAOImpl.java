@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import ven.spring.mall.model.CategoryVO;
 import ven.spring.mall.model.MallItemVO;
+import ven.spring.mall.model.MallOrderListVO;
+import ven.spring.mall.model.MallOrderVO;
 import ven.spring.mall.model.ItemViewVO;
 
 @Repository
@@ -58,6 +60,18 @@ public class AdminDAOImpl implements AdminDAO {
 	public void itemDelete(int item_num) throws Exception {
 		sql.delete(namespace + ".itemDelete", item_num);
 		
+	}
+
+	//주문 목록
+	@Override
+	public List<MallOrderVO> orderList() throws Exception {
+		return sql.selectList(namespace + ".orderList");
+	}
+
+	//특정 주문목록
+	@Override
+	public List<MallOrderListVO> orderView(MallOrderVO mallOrderVO) throws Exception {
+		return sql.selectList(namespace + ".orderView", mallOrderVO);
 	}
 
 

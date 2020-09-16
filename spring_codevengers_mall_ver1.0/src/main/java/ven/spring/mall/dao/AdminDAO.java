@@ -4,6 +4,8 @@ import java.util.List;
 
 import ven.spring.mall.model.CategoryVO;
 import ven.spring.mall.model.MallItemVO;
+import ven.spring.mall.model.MallOrderListVO;
+import ven.spring.mall.model.MallOrderVO;
 import ven.spring.mall.model.ItemViewVO;
 
 public interface AdminDAO {
@@ -25,4 +27,10 @@ public interface AdminDAO {
 
 	//상품삭제
 	public void itemDelete(int item_num) throws Exception;
+	
+	//주문목록
+	public List<MallOrderVO> orderList() throws Exception;
+		
+	//특정 주문목록
+	public List<MallOrderListVO> orderView(MallOrderVO mallOrderVO) throws Exception;
 }

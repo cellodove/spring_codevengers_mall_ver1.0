@@ -68,11 +68,6 @@ from mall_item
 
 
 
-
-
-
-
-
 <!-- 상품수정 -->
 <update id="itemModify">
 	update mall_item
@@ -94,6 +89,48 @@ delete
 	mall_item
 where item_num = #{item_num}
 </delete>
+
+
+<!-- 모든 유저의 주문 목록 -->
+<select id="orderList" resultType="ven.spring.mall.model.MallOrderVO">
+ select
+     cor_id, mem_id, cor_rec, mem_zipcode, mem_adress1, mem_adress2, mem_tel1, mem_tel2, mem_tel3, cor_amount, cor_date, delivery
+ from mall_order
+</select>
+
+<!-- 특정 주문 목록 -->
+<select id="orderView" resultType="ven.spring.mall.model.MallOrderListVO">
+ select
+    o.cor_id, o.mem_id, o.cor_rec, o.mem_zipcode, o.mem_adress1, o.mem_adress2, o.mem_tel1,o.mem_tel2,o.mem_tel3, o.cor_amount, o.cor_date,
+     d.cor_details_num, d.item_num, d.wishlist_stock,
+     g.item_name, g.item_thumbImg, g.item_price
+ from mall_orde o
+         inner join mall_orde_details d
+             on o.cor_id = d.cor_id
+         inner join mall_item g
+             on d.item_num = g.item_num
+     where o.cor_id = #{cor_id}
+</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

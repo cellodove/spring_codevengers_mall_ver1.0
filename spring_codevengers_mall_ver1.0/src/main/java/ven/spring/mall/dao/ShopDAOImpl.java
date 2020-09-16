@@ -9,6 +9,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import ven.spring.mall.model.ItemViewVO;
+import ven.spring.mall.model.MallOrderDetailVO;
+import ven.spring.mall.model.MallOrderListVO;
+import ven.spring.mall.model.MallOrderVO;
 import ven.spring.mall.model.ReviewBoardListVO;
 import ven.spring.mall.model.ReviewBoardVO;
 import ven.spring.mall.model.WishListListVO;
@@ -96,6 +99,37 @@ public class ShopDAOImpl implements ShopDAO {
 	@Override
 	public void deleteWishList(WishListVO wishListVO) throws Exception {
 		sql.delete(namespace + ".deleteWishList", wishListVO);
+	}
+
+	
+	//주문 정보
+	@Override
+	public void orderInfo(MallOrderVO mallOrderVO) throws Exception {
+		sql.insert(namespace + ".orderInfo", mallOrderVO);
+	}
+
+	//주문 상세 정보
+	@Override
+	public void orderInfo_Details(MallOrderDetailVO mallOrderDetailVO) throws Exception {
+		sql.insert(namespace + ".orderInfo_Details",  mallOrderDetailVO);
+	}
+
+	//장바구니 비우기
+	@Override
+	public void wishListAllDelete(String mem_id) throws Exception {
+		sql.delete(namespace + ".wishListAllDelete", mem_id);
+	}
+
+	//주문 목록
+	@Override
+	public List<MallOrderVO> orderList(MallOrderVO mallOrderVO) throws Exception {
+		return sql.selectList(namespace + ".orderList" , mallOrderVO);
+	}
+
+	//특정 주문 목록
+	@Override
+	public List<MallOrderListVO> orderView(MallOrderVO mallOrderVO) throws Exception {
+		return sql.selectList(namespace + ".orderView",mallOrderVO);
 	}
 }
 

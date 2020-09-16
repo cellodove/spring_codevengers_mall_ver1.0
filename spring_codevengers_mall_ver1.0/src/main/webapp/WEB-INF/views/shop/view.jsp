@@ -207,11 +207,11 @@ function reviewList(){
  					<script>
   					$(".addCart_btn").click(function(){
    						var item_num = $("#gdsNum").val();
-   						var wishList_stock = $(".numBox").val();
+   						var wishlist_stock = $(".numBox").val();
       
    						var data = {
    							item_num : item_num,
-   							wishList_stock : wishList_stock
+   							wishlist_stock : wishlist_stock
      						};
    
   						 $.ajax({

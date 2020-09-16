@@ -16,6 +16,7 @@
 		</c:if>
 		<li>${member.mem_id}님 환영합니다.</li>
 		<li><a href="/shop/wishListList">장바구니</a></li>
+		<li><a href="/shop/orderList">주문 리스트</a></li>
 		<li><a href="/member/logout">로그아웃</a></li>
 
 

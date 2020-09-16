@@ -26,6 +26,8 @@ import org.springframework.web.multipart.MultipartFile;
 import net.sf.json.JSONArray;
 import ven.spring.mall.model.CategoryVO;
 import ven.spring.mall.model.MallItemVO;
+import ven.spring.mall.model.MallOrderListVO;
+import ven.spring.mall.model.MallOrderVO;
 import ven.spring.mall.model.ItemViewVO;
 import ven.spring.mall.service.AdminService;
 import ven.spring.mall.util.UploadFileUtil;
@@ -210,5 +212,43 @@ public class AdminController extends HttpServlet {
 
 		return;
 	}
+	
+	
+	//주문목록
+	@RequestMapping(value = "/shop/orderList", method = RequestMethod.GET)
+	public void getOrderList(Model model) throws Exception {
+		logger.info("get order list");
+		
+		List<MallOrderVO> mallOrderVO = adminService.orderList();
+		model.addAttribute("mallOrderVO", mallOrderVO);
+	}
+	
+	//주문 상세목록
+	
+	public void getOrderList(@RequestParam("n") String cor_id, MallOrderVO mallOrderVO, Model model) throws Exception {
+		logger.info("get order view");
+		
+		mallOrderVO.setCor_id(cor_id);
+		List<MallOrderListVO> mallOrderListVO = adminService.orderView(mallOrderVO);
+		model.addAttribute("mallOrderListVO", mallOrderListVO);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

@@ -3,6 +3,9 @@ package ven.spring.mall.dao;
 import java.util.List;
 
 import ven.spring.mall.model.ItemViewVO;
+import ven.spring.mall.model.MallOrderDetailVO;
+import ven.spring.mall.model.MallOrderListVO;
+import ven.spring.mall.model.MallOrderVO;
 import ven.spring.mall.model.ReviewBoardListVO;
 import ven.spring.mall.model.ReviewBoardVO;
 import ven.spring.mall.model.WishListListVO;
@@ -43,5 +46,27 @@ public interface ShopDAO {
 	//장바구니 삭제
 	public void deleteWishList(WishListVO wishListVO) throws Exception;
 	
+	//주문정보
+	public void orderInfo(MallOrderVO mallOrderVO) throws Exception;
+	
+	//주문 상세 정보
+	public void orderInfo_Details(MallOrderDetailVO mallOrderDetailVO) throws Exception;
 
+	//장바구니 비우기
+	public void wishListAllDelete(String mem_id) throws Exception;
+	
+	//주문목록
+	public List<MallOrderVO> orderList(MallOrderVO mallOrderVO) throws Exception;
+	
+	//특정 주문 목록
+	public List<MallOrderListVO> orderView(MallOrderVO mallOrderVO) throws Exception;
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

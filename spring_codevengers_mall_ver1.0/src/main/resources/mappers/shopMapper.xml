@@ -114,6 +114,53 @@ delete item_wishlist
 		and mem_id = #{mem_id}
 </delete>
 
+<!-- 주문 정보 -->
+<insert id="orderInfo">
+ insert into mall_order(cor_id, mem_id, cor_rec, mem_zipcode, mem_adress1, mem_adress2, mem_tel1,mem_tel2,mem_tel3, cor_amount)
+     values(#{cor_id}, #{mem_id}, #{cor_rec}, #{mem_zipcode}, #{mem_adress1}, #{mem_adress2}, #{mem_tel1},#{mem_tel2},#{mem_tel3}, #{cor_amount})
+</insert>
+   
+<!-- 주문 상세 정보 --> 
+<insert id="orderInfo_Details">
+ insert into mall_order_details(cor_details_num, cor_id, item_num, wishlist_stock)
+     select mall_order_details_seq.nextval, #{cor_id}, item_num, wishlist_stock
+         from item_wishlist   
+</insert> 
+
+
+<!-- 카트 비우기 -->
+<delete id="wishListAllDelete">
+ delete item_wishlist
+     where mem_id = #{mem_id}
+</delete>
+
+
+<!-- 특정 유저의 주문 목록 -->
+<select id="orderList" resultType="ven.spring.mall.model.MallOrderVO">
+ select
+     cor_id, mem_id, cor_rec, mem_zipcode, mem_adress1, mem_adress2, mem_tel1,mem_tel2,mem_tel3, cor_amount, cor_date
+ from mall_order 
+     where mem_id = #{mem_id}
+</select>
+
+
+<!-- 특정 주문 목록 -->
+<select id="orderView" resultType="ven.spring.mall.model.MallOrderListVO">
+ select
+     o.cor_id, o.mem_id, o.cor_rec, o.mem_zipcode, o.mem_adress1, o.mem_adress2, o.mem_tel1,o.mem_tel2,o.mem_tel3, o.cor_amount, o.cor_date,
+     d.cor_details_num, d.item_num, d.wishlist_stock,
+     g.item_name, g.item_thumbImg, g.item_price
+ from mall_order o
+         inner join mall_order_details d
+             on o.cor_id = d.cor_id
+         inner join mall_item g
+             on d.item_num = g.item_num
+     where o.mem_id = #{mem_id}
+         and o.cor_id = #{cor_id}
+</select>
+
+
+
 
 
 
